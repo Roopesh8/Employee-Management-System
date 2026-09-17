@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employee Management System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <h1>Employee Management System</h1>
+      <p>Personnel roster — department, compensation, and lookup</p>
+    </div>
+    <div class="stamp" id="todayStamp"></div>
+  </header>
+
+  <div class="stats-row">
+    <div class="stat"><div class="num" id="statTotal">0</div><div class="label">Employees on roster</div></div>
+    <div class="stat"><div class="num" id="statDepts">0</div><div class="label">Departments</div></div>
+    <div class="stat"><div class="num" id="statAvg">$0</div><div class="label">Average salary</div></div>
+    <div class="stat"><div class="num" id="statTotalSalary">$0</div><div class="label">Total payroll</div></div>
+  </div>
+
+  <div class="controls">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="Search by name or department…" autocomplete="off">
+    </div>
+    <select id="deptFilter">
+      <option value="">All departments</option>
+    </select>
+    <button class="btn btn-primary" id="addBtn">+ Add employee</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th data-sort="name">Name <span class="arrow" id="arrow-name"></span></th>
+        <th data-sort="department">Department <span class="arrow" id="arrow-department"></span></th>
+        <th data-sort="salary">Salary <span class="arrow" id="arrow-salary"></span></th>
+        <th style="text-align:right;">Actions</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+
+  <div class="empty-state" id="emptyState" hidden>
+    <div class="glyph">—</div>
+    <div>No employees match this search.</div>
+  </div>
+
+  <footer class="note">Data is stored locally in this browser only.</footer>
+</div>
+
+<div class="overlay" id="overlay" hidden>
+  <div class="modal">
+    <h2 id="modalTitle">Add employee</h2>
+    <input type="hidden" id="editId">
+    <div class="field">
+      <label for="nameInput">Full name</label>
+      <input type="text" id="nameInput" placeholder="e.g. Priya Nair">
+      <div class="error-text" id="nameError"></div>
+    </div>
+    <div class="field">
+      <label for="deptInput">Department</label>
+      <input type="text" id="deptInput" list="deptList" placeholder="e.g. Engineering">
+      <datalist id="deptList"></datalist>
+      <div class="error-text" id="deptError"></div>
+    </div>
+    <div class="field">
+      <label for="salaryInput">Salary (annual)</label>
+      <input type="number" id="salaryInput" placeholder="e.g. 65000" min="0" step="100">
+      <div class="error-text" id="salaryError"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn" id="cancelBtn">Cancel</button>
+      <button class="btn btn-primary" id="saveBtn">Save</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
